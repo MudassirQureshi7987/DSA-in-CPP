@@ -269,6 +269,33 @@ Node* getStartingNode(Node* head)
   return slow;
 }
 
+void insertAtValue(Node* &head,Node* &tail,int d,int value)
+{
+  Node* temp = head;
+
+  while(temp->data != value)
+  {
+    temp = temp ->next;
+  }
+
+  
+    Node* newe = new Node(d);
+    newe->next = temp->next;
+    temp->next = newe;
+
+    if(newe->next == NULL)
+    {
+      tail = newe;
+    }
+    
+
+    
+  
+
+
+ 
+}
+
 void removeLoop(Node* head)
 {
   if(head==NULL)
@@ -285,6 +312,8 @@ void removeLoop(Node* head)
 
   temp->next = NULL;
 }
+
+/*
 int main()
 { 
   // created a new node
@@ -345,7 +374,7 @@ int main()
  else
  {
   cout<<"Loop is absent"<<endl;
- } */
+ } 
 
 Node* ans = floydCycleDetectionAlgorithm(head);
 cout<<"They meet at "<<ans->data<<endl;
@@ -355,6 +384,34 @@ cout<<"Starting node is "<<meet->data<<endl;
 removeLoop(head);
 print(head);
 
+} 
+*/
+
+int main()
+{
+   Node* node1 = new Node(10); 
+   Node* head = node1;
+   Node* tail = node1;
+
+   insertAtHead(head,11);
+   insertAtTail(tail,12);
+
+   print(head);
+
+   insertAtValue(head,tail,14,10);
+
+   print(head);
+
+   insertAtValue(head,tail,15,11);
+
+   print(head);
+
+   insertAtValue(head,tail,16,12);
+
+   print(head);
+
+   cout<<"Head "<<head->data<<endl;
+   cout<<"Tail "<<tail->data<<endl;
 }
 
 
