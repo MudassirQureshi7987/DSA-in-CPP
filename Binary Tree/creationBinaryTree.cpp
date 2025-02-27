@@ -178,6 +178,42 @@ void reverseLevelOrderTraversal(node* root)
     }
 }
 
+void buildFromLevelOrder(node* &root)
+{
+    queue<node*> q;
+    cout<<"Enter data for root: "<<endl;
+    int data;
+    cin>>data;
+    root = new node(data);
+
+    q.push(root);
+
+    while(!q.empty())
+    {
+        node* temp = q.front();
+        q.pop();
+
+        cout<<"Enter data for left of "<<temp->data<<endl;
+        int leftdata;
+        cin>>leftdata;
+
+        if(leftdata != NULL)
+        {
+            temp->left = new node(leftdata);
+            q.push(temp->left);
+        }
+
+        cout<<"Enter data for right of "<<temp->data<<endl;
+        int rightdata;
+        cin>>rightdata;
+
+        if(rightdata != -1)
+        {
+            temp->right = new node(rightdata);
+        }
+    }
+}
+
 int main()
  {
     node* root = NULL;
