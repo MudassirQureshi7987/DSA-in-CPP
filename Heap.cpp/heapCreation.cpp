@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 
 class heap
@@ -53,24 +54,21 @@ class heap
 
         //root node ko sahi position pe laa lo
         int i = 1;
-        while(i < size)
-        {
-            int leftIndex = 2*i;
-            int rightIndex = 2*i+1;
-
-            if(leftIndex < size && arr[leftIndex] > arr[i])
-            {
-                swap(arr[leftIndex],arr[i]);
-                i = leftIndex;
-            }
-            else if(rightIndex < size && arr[rightIndex] > arr[i])
-            {
-                swap(arr[rightIndex],arr[i]);
-                i = rightIndex;
-            }
-            else
-            {
-                return ;
+        while(2*i <= size) {
+            int leftIndex = 2 * i;
+            int rightIndex = 2 * i + 1;
+            int largest = i;
+            
+            if(leftIndex <= size && arr[leftIndex] > arr[largest])
+                largest = leftIndex;
+            if(rightIndex <= size && arr[rightIndex] > arr[largest])
+                largest = rightIndex;
+            
+            if(largest != i) {
+                swap(arr[i], arr[largest]);
+                i = largest;
+            } else {
+                break;
             }
         }
     }
@@ -86,7 +84,7 @@ void heapify(int arr[],int n,int i)
     {
         largest = left;
     }
-    else if(right < n && arr[right] > arr[largest])
+    if(right < n && arr[right] > arr[largest])
     {
         largest = right;
     }
@@ -97,7 +95,18 @@ void heapify(int arr[],int n,int i)
         heapify(arr,n,largest);
     }
 }
+void heapSort(int arr[],int n)
+{
+    int size = n;
 
+    while(size > 1)
+    {
+        swap(arr[size],arr[1]);
+        size--;
+
+        heapify(arr,size,1);
+    }
+}
 int main()
 {
     heap h;
@@ -120,5 +129,42 @@ int main()
     {
         cout<<arr[i]<<" ";
     }cout<<endl;
+
+
+
+
+    cout<<"Using Priority Queue as MaxHeap"<<endl;
+
+    priority_queue<int> pq;
+
+    pq.push(4);
+    pq.push(3);
+    pq.push(6);
+    pq.push(2);
+
+    cout<<"Element at top is "<<pq.top()<<endl;
+    pq.pop();
+    cout<<"Element at top is "<<pq.top()<<endl;
+    cout<<"Size of priority queue is "<<pq.size()<<endl;
+    if(pq.empty())
+    {
+        cout<<"Empty"<<endl
+        ;
+    }
+    else
+    {
+        cout<<"Not Empty"<<endl;
+    }
+    
+    //min Heap
+    priority_queue<int,vector<int>,greater<int> > minHeap;
+
+    minHeap.push(4);
+    minHeap.push(3);
+    minHeap.push(6);
+    minHeap.push(2);
+
+    cout<<"Element at top is "<<minHeap.top()<<endl;
+
     return  0;
 }
