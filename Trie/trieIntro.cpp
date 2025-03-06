@@ -61,6 +61,64 @@ class Trie
     {
         insertUtil(root,word);
     }
+
+    bool searchUtil(TrieNode* root,string word)
+    {
+        //base case
+        if(word.length() == 0)
+        {
+            return root->isTerminal;
+        }
+
+        int index = word[0] - 'A';
+        TrieNode* child;
+
+        if(root->children[index] != NULL)
+        {
+            child = root->children[index];
+        }
+        else 
+        {
+            return false;
+        }
+
+        //RECURSION
+        return searchUtil(child,word.substr(1));
+    }
+
+    bool searchWord(string word)
+    {
+        return searchUtil(root,word);
+    }
+
+    void removeUtil(TrieNode* root,string word)
+    {
+        //base case
+        if(word.length() == 0)
+        {
+            root->isTerminal = false;
+            return ;
+        }
+
+        int index = word[0] - 'A';
+        TrieNode* child;
+
+        if(root->children[index] != NULL)
+        {
+            child = root->children[index];
+        }
+        else
+        {
+            return ;
+        }
+
+        removeUtil(child,word.substr(1));
+    }
+
+    void removeWord(string word)
+    {
+        removeUtil(root,word);
+    }
 };
 
 int main()
@@ -68,5 +126,18 @@ int main()
     Trie* t = new Trie();
 
     t->insertWord("WORD");
+    t->insertWord("WOR");
+    t->insertWord("TIME");
+    t->insertWord("DO");
+    t->removeWord("WORD");
+    
+
+    if(t->searchWord("WORD"))
+    {
+        cout<<"Present"<<endl;
+    }
+    else{
+        cout<<"Absent"<<endl;
+    }
     return 0;
 }
