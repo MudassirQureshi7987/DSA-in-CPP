@@ -113,6 +113,26 @@ class Trie
         }
 
         removeUtil(child,word.substr(1));
+
+        // Optional: Cleanup - if the child is not terminal and has no children, delete it.
+        if(child->isTerminal != true)
+        {
+            bool hasChild = false;
+            for(int i = 0;i < 26;i++)
+            {
+                if(root->children[i] != NULL )
+                {
+                    hasChild = true;
+                    break;
+                }
+            }
+
+            if(hasChild != true)
+            {
+                delete child;
+                root->children[index] = NULL;
+            }
+        }
     }
 
     void removeWord(string word)
