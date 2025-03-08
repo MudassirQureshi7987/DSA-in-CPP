@@ -23,7 +23,7 @@
     {
         count++;
 
-        if(str[i] != str[i+1])
+        if(i+1 < str.length() && str[i] != str[i+1])
         {
             ans += str[i] + to_string(count);
             count = 0;
