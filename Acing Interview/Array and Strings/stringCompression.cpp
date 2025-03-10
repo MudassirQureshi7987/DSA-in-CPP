@@ -25,7 +25,8 @@
 
         if(i+1 < str.length() && str[i] != str[i+1])
         {
-            ans += str[i] + to_string(count);
+            ans.push_back(str[i]);
+            ans += to_string(count);
             count = 0;
         }
     }
