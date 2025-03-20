@@ -1,5 +1,5 @@
 /**
- *  Cracking the coding interview edition 6
+
  *  Problem 2.4 Partition:
  *  Write code to partition linked list around a value x, such that
  *  nodes less than x come before all the nodes greater than or equal to x.
