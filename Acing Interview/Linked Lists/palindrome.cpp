@@ -122,3 +122,42 @@ bool isPalindromeIter1( Node * head ) {
       return false;
     }
 }
+
+/**
+ * [isPalindromeRecurHelper - Recursive approach to determine if list is palindrome]
+ * Idea is to use two pointers left and right, we move left and right to reduce
+ * problem size in each recursive call, for a list to be palindrome, we need these two
+ * conditions to be true in each recursive call.
+ * 		a. Data of left and right should match.
+ * 		b. Remaining Sub-list is palindrome.
+ * We are using function call stack for right to reach at last node and then compare
+ * it with first node (which is left).
+ * @param  left  [left pointer of sublist]
+ * @param  right [right pointer of sublist]
+ * @return       [true if sublist is palindrome, false if not]
+  */
+
+  bool isPalindromeHelper(Node* &left,Node* right)
+  {
+    if(right == NULL)
+    {
+      return true;
+    }
+
+    bool isPalindrome = isPalindromeHelper(left,right->next);
+    if(!isPalindrome)
+    {
+      return false;
+    }
+
+    isPalindrome = (left->data == right->data);
+
+    left = left->next;
+
+    return isPalindrome;
+  }
+
+
+ bool isPalindromeRecur( Node * head ) {
+  return isPalindromeRecurHelper(head, head);
+}
