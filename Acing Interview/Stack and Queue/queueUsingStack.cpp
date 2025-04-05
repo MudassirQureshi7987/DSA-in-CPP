@@ -1,6 +1,6 @@
 #include<stack>
 #include<iostream>
-using namepace std;
+using namespace std;
 
 class Queue {
     // Define the data members(if any) here.
