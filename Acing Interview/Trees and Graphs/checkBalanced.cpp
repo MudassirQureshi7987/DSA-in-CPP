@@ -61,21 +61,21 @@ class TreeNode
     }
 
 
-    int checkheight(TreeNode* root)
+    int checkHeight(TreeNode* root)
     {
         if(root == NULL)
         {
             return 0;
         }
 
-        int leftTree = checkheight(root->left);
+        int leftTree = checkHeight(root->left);
 
         if(leftTree == -1)
         {
             return -1;
         }
 
-        int rightTree = checkheight(root->right);
+        int rightTree = checkHeight(root->right);
 
         if(rightTree == -1)
         {
