@@ -34,6 +34,25 @@ class Solution {
           
           return false;
       }
+      
+      bool dfs(int node,int parent,vector<vector<int> > &adj,int vis[])
+      {
+          vis[node] = 1;
+          
+          for(auto adjNode : adj[node])
+          {
+              if(!vis[adjNode])
+              {
+                  if(dfs(adjNode,node,adj,vis) == true)   return true;
+              }
+              else if(parent != adjNode)
+              {
+                  return true;
+              }
+          }
+          
+          return false;
+      }
       bool isCycle(int V, vector<vector<int>>& edges) {
           vector<vector<int> > adj(V);
           
@@ -52,7 +71,7 @@ class Solution {
           {
               if(!vis[i])
               {
-                  if(detect(i,adj,vis))
+                  if(dfs(i,-1,adj,vis))
                   {
                       return true;
                   }
