@@ -137,14 +137,14 @@ bool isPalindromeIter1( Node * head ) {
  * @return       [true if sublist is palindrome, false if not]
   */
 
-  bool isPalindromeHelper(Node* &left,Node* right)
+  bool isPalindromeRecurHelper(Node* &left,Node* right)
   {
     if(right == NULL)
     {
       return true;
     }
 
-    bool isPalindrome = isPalindromeHelper(left,right->next);
+    bool isPalindrome = isPalindromeRecurHelper(left,right->next);
     if(!isPalindrome)
     {
       return false;
@@ -161,3 +161,48 @@ bool isPalindromeIter1( Node * head ) {
  bool isPalindromeRecur( Node * head ) {
   return isPalindromeRecurHelper(head, head);
 }
+
+/**
+ * [isPalindromeIter2 - Iteratively determine if list is palindrome using a stack]
+ * @param  head [Head node of the list]
+ * @return      [True if list is palindrome, false if not]
+ */
+
+ bool isPalindromeIter2( Node * head ) 
+ {
+  if(head == NULL || head->next == NULL)
+  {
+    return true;
+  }
+
+  stack<int> st;
+
+  Node* fast = head;
+  Node* slow = head;
+
+  while(fast && fast->next != NULL)
+  {
+    fast = fast->next->next;
+    st.push(slow->data);
+    slow = slow->next;
+  }
+
+  if(fast && fast->next == NULL)
+  {
+    slow = slow->next;
+  }
+
+  fast = head;
+
+  while(!st.empty() && slow != NULL)
+  {
+    int curr = st.top();
+    st.pop();
+    if(curr != slow->data)
+    {
+      return false;
+    }
+    slow = slow->next;
+  }
+  return true;
+ }

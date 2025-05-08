@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<queue>
-#include<pair>
+#include<limits.h>
 using namespace std;
 
 class Solution {
