@@ -5,7 +5,7 @@ using namespace std;
 
 class DisjointSet
 {
-    vector<int> rank,parent;
+    vector<int> rank,parent,size;
 
     public:
 
@@ -13,9 +13,11 @@ class DisjointSet
         {
             rank.resize(n+1,0);
             parent.resize(n+1);
+            size.resize(n+1);
             for(int i = 0;i <= n;i++)
             {
                 parent[i] = i;
+                size[i] = 1;
             }
         }
 
@@ -50,7 +52,32 @@ class DisjointSet
                 rank[ulp_u]++;
             }
         }
+
+        void unionBySize(int u,int v)
+        {
+            int ulp_u = findUPar(u);
+            int ulp_v = findUPar(v);
+
+            if(ulp_u == ulp_v)
+            {
+                return ;
+            }
+
+            
+            if(size[ulp_u] < size[ulp_v])
+            {
+                parent[ulp_u] = ulp_v;
+                size[ulp_v] += size[ulp_u];
+            }
+            else // this case will also cover the case when size[ulp_u] == size[ulp_v]
+                // because we are not using rank here
+            {
+                parent[ulp_v] = ulp_u;
+                size[ulp_u] += size[ulp_v];
+            }
+        }
 };
+
 int main() {
     DisjointSet ds(7);
     ds.unionByRank(1, 2);
