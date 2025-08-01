@@ -23,3 +23,6 @@ public:
         return cnt;
     }
 };
+
+// Yet to be solved using segment tree
+// will try to implement it later
