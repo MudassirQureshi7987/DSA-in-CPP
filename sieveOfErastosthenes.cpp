@@ -9,13 +9,13 @@ int sieveOfErastosthenes(int n)
 
     prime[0] = prime[1] = false;
 
-    for(int i = 0;i<n;i++)
+    for(int i = 2;i<n;i++)
     {
-        if(prime[i])
+        if(prime[i])  // we will only enter this loop if it is a prime numbber
         {
             count++;
 
-            for(int j = i*i;j<n;j = j + i)
+            for(int j = i*i;j < n;j = j + i)
             {
                 prime[j] = false;
             }
