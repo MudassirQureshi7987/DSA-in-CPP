@@ -30,6 +30,8 @@ int main()
 
     int ans2 = std::gcd(a,b);   // ✅ Corrected
     cout<<"\nGCD (using std::gcd) of "<<a<<" and "<<b<<" is "<<ans2;
+    // It is not working because the C++14 standard does not include std::gcd in <numeric>.
+    // std::gcd was introduced in C++17. To use std::gcd, you need to compile your code with C++17 or later.
 
     return 0;
 }
